@@ -1,0 +1,32 @@
+<aura:component >
+	 <ltng:require styles="/resource/SLDS0102/assets/styles/salesforce-lightning-design-system.min.css"
+                   scripts=" /resource/LightningLookup/LightningLookup/jquery-2.1.1.min.js" 
+                   afterScriptsLoaded="{!c.closeSortBy}"/>
+
+    <div >
+        <button class="slds-button slds-button--icon-container menuIcn" aria-haspopup="true" aura:id="dropDwnBtn">
+            <img class="displyIconImage" src="/resource/SLDS0102/assets/icons/utility/filter_60.png" />
+            <span class="slds-assistive-text">Settings</span>
+        </button>
+        <div class="slds-dropdown slds-dropdown--left slds-dropdown--small slds-dropdown--menu menuDDwn CustomStyleMenu" style="position:absolute;display:none;" id="dropDwnBtn_menu">
+            <ul class="slds-dropdown__list customUL" role="menu">
+                <li id="menu-10-0" class="slds-dropdown__item slds-is-selected slds-has-icon--left slds-is-selected menuItem" aria-selected="true">
+                    <a href="" class="slds-truncate" role="menuitemradio">
+                        <img src="/resource/SLDS0102/assets/icons/utility/check_60.png" class="showImg tickSymbol" aura:id="upcommingImg"/>
+                        <ui:outputText value="Upcoming" aura:Id="Upcoming"/>
+                    </a>
+                </li>
+                
+                <li id="menu-11-1" href="#" class="slds-dropdown__item slds-has-icon--left">
+                    <a href="" class="slds-truncate" role="menuitemradio">
+                        <img src="/resource/SLDS0102/assets/icons/utility/check_60.png'}" class="hideImg tickSymbol" aura:id="topAttendanceImg"/>
+                        <ui:outputText value="Top Attendees" aura:Id="TopAttendees"/>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+</aura:component>

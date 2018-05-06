@@ -1,0 +1,10 @@
+<aura:component controller="InputLookupController" implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName">
+    <aura:handler name="init" value="{!this}" action="{!c.onload}"/>
+	<aura:attribute name="type" type="String" description="Sobject Type" />
+    <aura:attribute name="value" type="String" description="Source / Destination value" />
+    <aura:attribute name="className" type="String" description="class name of the input object" />
+    <aura:attribute name="FieldsToDisplay" type="String" description="It is used to fetch the S-object's other fields name which user wants to display "/>
+    <div aura:id="ElementHere">
+     {!v.lookupBody}
+    </div>
+</aura:component>

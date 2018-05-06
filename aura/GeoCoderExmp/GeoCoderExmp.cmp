@@ -1,0 +1,6 @@
+<aura:component implements="force:appHostable"> 
+    <ltng:require scripts="/resource/geoCode/geoCode.js"/>
+
+    <ui:inputText aura:id="myAddress" />
+    <ui:button label="gel Lat n Long " press="{!c.codeAddress}"/>
+</aura:component>

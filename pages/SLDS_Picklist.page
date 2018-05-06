@@ -1,0 +1,164 @@
+<apex:page showHeader="false" sidebar="false" controller="SLDS_PicklistController">
+<!-- Lightning Design System Source -->
+ <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+<!-- jQuery CDN -->
+ <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- MomentJS CDN -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<!-- Important To Include ALJS init File-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-init.js')}"></script>
+<!-- ALJS Datepicker Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-picklist.js')}"></script>
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ 
+ 
+   <style type="text/css">
+        html,
+        body {
+            margin: 0;
+            padding: 2px;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+ <apex:form >
+    <div class="slds">
+        <!--<div class="slds-grid">
+            <div class="slds-col slds-no-flex slds-sizing--1-of-2 slds-m-right--medium">
+                <div class="slds-picklist" aria-expanded="true" id="picklist">
+                    <button class="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
+                        <span class="slds-truncate">Select an Option</span>
+                        <svg aria-hidden="true" class="slds-icon">
+                             <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#down')}"></use>
+                        </svg>
+                    </button>
+                    <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu slds-hide">
+                       <ul class="slds-dropdown__list" role="menu">
+                            <li id="menu-0-0" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option A
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-1" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option B
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-2" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                       Option C
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-3" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option D
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-4" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option E
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-5" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option F
+                                    </p>
+                                </a>
+                            </li>
+                            <li id="menu-0-6" href="#" class="slds-dropdown__item">
+                                <a href="javascript:void(0)" role="menuitemradio">
+                                    <p class="slds-truncate">
+                                        Option G
+                                    </p>
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        </div>-->
+        
+             
+            <div class="slds-col slds-no-flex slds-sizing--1-of-2 slds-m-right--medium">
+                <div class="slds-picklist" aria-expanded="true" id="Industry">
+                    <button class="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
+                        <span class="slds-truncate">Select an Option</span>
+                        <svg aria-hidden="true" class="slds-icon">
+                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#down')}"></use>
+                        </svg>
+                    </button>
+                   
+                    <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu slds-hide">
+                        <ul class="slds-dropdown__list" role="menu">
+                            <apex:repeat value="{!Industries}" var="val">
+                                <li id="{!val.label}" class="slds-dropdown__item">
+                                    <a href="#" role="menuitemradio">
+                                        {!val.label}
+                                    </a>
+                                </li>
+                            </apex:repeat>
+                            
+                        </ul>
+                    </div>
+                    
+                </div>
+                
+            </div>
+            
+    </div>
+ </apex:form>
+                <script>
+                    var j$ = jQuery.noConflict();
+                    var assets = '{!URLFOR($Resource.SLDS0102)}';
+                      
+                    //ALJS Initialization   
+                           
+                    j$.aljsInit({
+                      assetsLocation: assets,
+                      scoped: true
+                    });
+                       
+                    j$(document).ready(function() {
+                     
+                    //Initializing Datepicker with options To The SLDS Input on document ready.
+                     
+                    //j$('#picklist').picklist({
+                    	//onChange: function(obj) { 
+                      //       console.log(obj); 
+                             
+                      //   }
+                    //});
+                    
+                    
+                    j$('#Industry').picklist({
+                        //selector: '[id="values"]',
+                    	onChange: function(obj1) { 
+                    	  console.log(obj1);  
+                    	     
+                             
+                             
+                         }
+                    });
+                    
+                    
+                           
+                    });
+                
+                </script>
+  
+</html>
+</apex:page>

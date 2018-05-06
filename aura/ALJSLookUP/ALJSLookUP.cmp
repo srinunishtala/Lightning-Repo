@@ -1,0 +1,29 @@
+<aura:component controller="SLDS_FormController"
+                implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" 
+                access="global" >
+    
+    <ltng:require styles="/resource/SLDS0102/assets/styles/salesforce-lightning-design-system-ltng.css" 
+                  scripts="/resource/ALJS/appiphony-lightning-js-master/public/lib/jquery/jquery-1.11.1.min.js,
+                           /resource/ALJS/appiphony-lightning-js-master/public/src/jquery.aljs-init.js,
+                           /resource/ALJS/appiphony-lightning-js-master/public/src/jquery.aljs-lookup.js"
+                  afterScriptsLoaded="{!c.intializeLookup}"/>
+    
+
+    
+    <div class="slds-form-element slds-lookup" data-select="single" data-scope="single" data-typeahead="true">
+    <label class="slds-form-element__label" for="lookup-01">Search Account</label>
+    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+        <c:svg class="slds-input__icon" xlinkHref="/resource/SLDS0102/assets/icons/utility-sprite/svg/symbols.svg#search" />
+        <input id="propertyLookup" 
+               class="slds-lookup__search-input slds-input" 
+               type="text" 
+               aria-autocomplete="list" 
+               role="combobox" 
+               aria-expanded="false" 
+               aria-activedescendant="" 
+               placeholder="Search Accounts"/>
+        <input type="hidden" id="searchAccountId"/>
+    
+	</div>
+</div>
+</aura:component>

@@ -1,0 +1,10 @@
+<aura:component implements="force:appHostable">
+     <aura:attribute name="Street" type="String" default="Street"/>
+      <aura:attribute name="City" type="String" default="City"/>
+      <aura:attribute name="State" type="String" default="State"/>
+      <aura:attribute name="PostalCode" type="String" default="State"/>
+       DisplayAddress{!v.Street}
+       DisplayAddress{!v.City}
+       DisplayAddress {!v.State}
+       DisplayAddress {!v.PostalCode}
+</aura:component>

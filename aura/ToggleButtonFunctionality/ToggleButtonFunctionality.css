@@ -1,0 +1,76 @@
+.THIS.toggle {
+    display: none;
+}
+.THIS .searchHeaderFont{
+      font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif;
+}
+.THIS .displyIconImage{
+  fill: #666666!important;
+  width: 1rem!important;
+  height: 1rem!important;
+}
+.THIS .customBtn{
+    color:#969696;
+    font-weight:normal!important;
+}
+.THIS .customBtn:first-child{
+  border-right:none!important;
+}
+.THIS .customBtn:hover{
+  color:#969696;
+  background-color: transparent;
+}
+.THIS .btnActive{
+  background:#f2f2f2!important;
+}
+.THIS .customBtn:focus{
+  box-shadow:none!important;
+  color:#969696!important;
+}
+.THIS .customBtn:active{
+  border:none!important;
+}
+.THIS .grayFill{
+  fill:#666666!important;
+  width: 1rem!important;
+  height: 1rem!important;
+}
+.THIS .slds-dropdown--small {
+    min-width: 12rem!important;
+}
+.THIS .CustomStyleMenu{
+    left: 56% !important;
+    /*min-width: 230px!important;*/
+}
+.THIS .CustomMenuSearch{
+    left: 76%!important;
+    min-width: 230px!important;
+    top: 26px;
+}
+.THIS .customButton{
+      border-radius: 0.25rem 0.25rem 0.25rem 0.25rem!important;
+}
+.THIS .showImg{
+    display:block;
+}
+.THIS .hideImg{
+    display:none;
+}
+.THIS .tickSymbol{
+    height:12px;
+    margin-top: 6px;
+}
+ .THIS .viewFloat{float:right!important;}
+
+@media only screen and (max-width:768px) {
+.THIS .eventIconM{
+        display: inline-block!important;float: left!important;margin-right: 10px!important;
+    }
+.THIS .viewFloat
+    {float:left!important;}
+}
+
+@media only screen and (max-width:376px)
+    {
+   .THIS .newEvtSM{line-height: 16px!important;padding-top: 5px!important;}
+}

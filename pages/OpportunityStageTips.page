@@ -1,0 +1,33 @@
+<apex:page docType="html-5.0" standardController="Opportunity">
+    <style>
+        .mypage .quote {
+            margin: 12px 0;
+            font-size: 64px;
+            text-align: center;
+        }
+        .mypage .delta {
+            font-size: 24px;
+            text-align: center;
+            color: green;
+        }
+    </style>
+    
+    <div class="mypage">
+        Stock:
+        <div class="quote">$42.00</div>
+        <div class="delta">+1.32%</div>
+    </div>
+    
+    <apex:outputpanel rendered="{!Opportunity.StageName== 'Prospecting'}">
+        {!Opportunity.StageName}
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!Opportunity.StageName== 'Needs Analysis'}">
+        {!Opportunity.StageName}
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!Opportunity.StageName== 'Proposal/Price Quote'}">
+        {!Opportunity.StageName}
+    </apex:outputpanel>
+    <apex:outputpanel rendered="{!Opportunity.StageName== 'Negotiation/Review'}">
+        {!Opportunity.StageName}
+    </apex:outputpanel>
+</apex:page>

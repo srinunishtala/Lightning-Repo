@@ -1,0 +1,38 @@
+<aura:component controller="SObjectLightningController" implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+<!-- Required Scripts/Styles -->
+    <!-- <ltng:require styles="/resource/SLDS0102/assets/styles/salesforce-lightning-design-system.min.css, /resource/jQueryUILookUp/jQuery/jquery-ui.css" scripts=" /resource/LightningLookup/LightningLookup/jquery-2.1.1.min.js, /resource/jQueryUILookUp/jQuery/jquery-ui.js, /resource/RequireJS" afterScriptsLoaded="{!c.editSObject}"/>-->
+    
+    <aura:handler name="init" value="{!this}" action="{!c.editSObject}"/>
+    <!-- HANDLERS START-->
+    <!--<aura:handler name="init" value="{!this}" action="{!c.editSObject}" />-->
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+    <!-- HANDLERS END-->
+    <!-- ATTRIBUTES START-->
+    <aura:attribute name="values" type="Object[]"/>
+    <aura:attribute name="FieldSet" type="string"/>
+    <aura:attribute name="isEdit" type="boolean" default="false"/>
+    <aura:attribute name="ObjectName" type="string"/>
+    <aura:attribute name="sObjectId" type="Id" />
+    <aura:attribute name="SObjectList" type="contact[]"/>
+    <aura:attribute name="strError" type="String[]"/>
+    <aura:attribute name="strSuccess" type="String[]"/>
+    <!-- ATTRIBUTES END-->
+   
+<!-- CONTAINER START-->    
+    <div class="container"> 
+        <!--<button class="slds-button slds-button-neutral slds-button-small" onclick="{!c.editSObject}" >Edit View</button>-->
+        <div> 
+        <aura:if isTrue="{!v.isDisplay}">
+         <div >  
+            <ui:inputDefaultError value="{!v.strError}" class="slds-notify slds-notify--toast slds-theme--error" />
+               {!v.form}
+                 <div class="slds-form-element__control" aura:id="ElementHere"></div>
+         </div>
+               <!-- <button class="slds-button slds-button-neutral" onclick="{!c.closeEdit}">Cancel</button>-->
+                 	<button class="slds-button slds-button--neutral slds-button--brand" onclick="{!c.save}">Save</button>
+        </aura:if>
+        </div>
+    </div>
+ <!--  CONTAINER END-->     
+</aura:component>

@@ -1,0 +1,5 @@
+<aura:component controller="DisplayCaseController" implements="force:appHostable">
+    <aura:attribute name="record" type="Case"/>
+    {!v.record.Subject} {!v.record.Description} {!v.record.Status}
+    <ui:button label="getCaseRecord" press="c:getCase"/>
+</aura:component>

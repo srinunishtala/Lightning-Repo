@@ -1,0 +1,4 @@
+<design:component label="Multi-Select">
+    <design:attribute name="objName" label="Object Name" description="Name of the sObject" />
+    <design:attribute name="fieldAPIName" label="Field API Name" description="Name of the API fieldName" />
+</design:component>

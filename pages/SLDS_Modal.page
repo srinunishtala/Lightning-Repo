@@ -1,0 +1,68 @@
+<apex:page showHeader="false" sidebar="false">
+<!-- Lightning Design System Source -->
+ <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+<!-- jQuery CDN -->
+ <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- MomentJS CDN -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"></script>
+<!-- Important To Include ALJS init File-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-init.js')}"></script>
+<!-- ALJS Datepicker Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-modal.js')}"></script>
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+ 
+<div class="slds">
+        <button class="slds-button slds-button--neutral" id="modal" data-aljs-show="modal-1">Open Modal 1</button>
+        
+        <div class="slds-text-longform slds-m-top--medium">
+            <p>If you want to Edit your page click on the Edit Opportunity button.</p>
+            
+        </div>
+        <div aria-hidden="true" role="dialog" class="slds-modal slds-fade-in-open slds-hide" id="modal-1">
+            <div class="slds-modal__container">
+                <div class="slds-modal__header">
+                    <h2 class="slds-text-heading--medium">Modal 1</h2>
+                    <button class="slds-button slds-button--icon-inverse slds-modal__close" data-aljs-dismiss="modal">
+                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                        </svg>
+                        <span class="slds-assistive-text">Close</span>
+                    </button>
+                </div>
+                <div class="slds-modal__content">
+                    <div>
+                        <p>Sit nulla est ex deserunt exercitation anim occaecat. Nostrud ullamco deserunt aute id consequat veniam incididunt duis in sint irure nisi.</p>
+                    </div>
+                </div>
+                <div class="slds-modal__footer">
+                    <button class="slds-button slds-button--neutral" data-aljs-dismiss="modal">Cancel</button>
+                    <button class="slds-button slds-button--neutral slds-button--brand" data-aljs-dismiss="modal">Save</button>
+                </div>
+            </div>
+        </div>
+        <div>
+          
+        </div>
+    </div>
+ 
+<script>
+var j$ = jQuery.noConflict();
+var assets = '{!URLFOR($Resource.SLDS0102)}';
+  
+//ALJS Initialization   
+       
+j$.aljsInit({
+  assetsLocation: assets,
+  scoped: true
+});
+   
+j$(document).ready(function() {
+ 
+//Initializing Datepicker with options To The SLDS Input on document ready.
+ 
+ j$('[id="modal"]').modal();
+});
+</script>
+  
+</html>
+</apex:page>

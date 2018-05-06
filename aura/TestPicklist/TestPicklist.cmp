@@ -1,0 +1,9 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global" >
+	<div class="slds-form-element">
+            <ui:inputSelect aura:id="filterByApartmentType" multiple="false" aura:disabled="false" class="slds-select heightBox">
+                <ui:inputSelectOption text="All Primary" label="All Contacts" value="true" class="sizePicklist"/>
+                <ui:inputSelectOption text="All Primary" label="All Primary" class="sizePicklist"/>
+                <ui:inputSelectOption text="All Secondary" label="All Secondary" class="sizePicklist"/>
+        </ui:inputSelect>
+        </div>
+</aura:component>

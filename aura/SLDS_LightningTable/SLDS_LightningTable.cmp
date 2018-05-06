@@ -1,0 +1,65 @@
+<aura:component controller="sObjectPaginationController" implements="force:appHostable,flexipage:availableForAllPageTypes">
+    
+    <aura:attribute name="object" type="String" default="Account" access="global"/>
+    <aura:attribute type="sObject[]" name="latestRecords" access="global"/>
+    <aura:attribute name="fields" type="String[]" default="Id,Name" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <aura:handler event="c:SLDS_PageChangeEvent" action="{!c.pageChange}" access="global"/>
+    
+    <aura:attribute name="page" type="integer" default="1" access="global"/>
+    <aura:attribute name="pages" type="integer" default="10" access="global"/>
+    <aura:attribute name="total" type="integer" default="200" access="global"/>
+    <aura:attribute name="pageSize" type="String" default="10" access="global"/>
+    
+    <aura:attribute name="accountid" type="String" />
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <head>
+        </head>
+        <body>
+            <div class="slds">
+                <div class="slds-card__header slds-grid">
+                    <div class="slds-media slds-media--center slds-has-flexi-truncate">
+                        <div class="slds-media__figure">
+                        </div>
+                        <div class="slds-media__body">
+                            <h2 class="slds-text-heading--small slds-truncate">{!v.object} Records</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="slds-card__body">
+                    <section class="slds-card__body">
+                        <div class="slds-scrollable--x">
+                            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked" >
+                                <thead>
+                                    <tr class="slds-text-heading--label">
+                                        <aura:iteration items="{!v.fields}" var="field" >
+                                        	<th class="slds-is-sortable" scope="col">
+                                              <div class="slds-truncate" onclick="{!c.sortByName}">{!field}</div>
+                                            </th>
+                                        </aura:iteration>
+                                        <th class="slds-cell-shrink"></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="data">
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+                
+                <ui:button class="slds-button slds-button--neutral uiButton--brand uiButton" 
+          label="Click to Upload File" press="{!c.navigateToMyComponent}"  />
+                
+                <div class="slds-truncate" >
+                    <a href="javascript:void(0);" onclick="{!c.nextStage}">Complete</a>
+                </div>
+                
+                <center>
+                	<c:SLDS_Pagination page="{!v.page}" pages="{!v.pages}" total="{!v.total}"/>
+              </center>
+            </div>
+        </body>
+    </html>
+</aura:component>

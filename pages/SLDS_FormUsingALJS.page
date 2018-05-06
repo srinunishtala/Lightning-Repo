@@ -1,0 +1,468 @@
+<apex:page showHeader="false" standardStylesheets="false" sidebar="false" applyHtmlTag="false" applyBodyTag="false" docType="html-5.0" controller="SLDS_FormController">    
+
+<!-- Lightning Design System Source -->
+ <apex:stylesheet value="{!URLFOR($Resource.SLDS0102, 'assets/styles/salesforce-lightning-design-system-vf.css')}" />
+ 
+<!-- jQuery CDN -->
+ <apex:includeScript value="https://code.jquery.com/jquery-1.11.1.min.js"/>
+ 
+<!-- MomentJS CDN -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.js"/>
+ 
+<!-- Important To Include ALJS init File-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-init.js')}"/>
+ 
+ 
+ <!-- ALJS Datepicker Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-datepicker.js')}"/>
+ 
+<!-- ALJS Modal Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-modal.js')}"/>
+ 
+ <!-- ALJS Modal Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-lookup.js')}"/>
+ 
+  <!-- ALJS Picklist Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-picklist.js')}"/>
+ 
+ <!-- ALJS Multi-Select Picklist Module-->
+ <script src="{!URLFOR($Resource.ALJS, 'appiphony-lightning-js-master/public/src/jquery.aljs-multi-select.js')}"/>
+ 
+ 
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+    <head>
+      <title>Salesforce Lightning Design System Using ALJS and Javascript</title>
+     </head>    
+
+    <body>    
+        <apex:form >
+            <apex:actionFunction name="SaveFunc" action="{!CreateContct}" rerender="error">
+                <apex:param name="FirstName" assignTo="{!strfirstName}" value=""/>
+                <apex:param name="LastName" assignTo="{!strlastName}" value=""/>
+                <apex:param name="Email" assignTo="{!stremail}" value=""/>
+                <apex:param name="Phone" assignTo="{!strphone}" value=""/> 
+                <apex:param name="CompanyName" assignTo="{!strCompanyName}" value=""/>
+                <apex:param name="Date" assignTo="{!strDate}" value=""/>
+                <apex:param name="Title" assignTo="{!strTitle}" value=""/>
+                <apex:param name="Priority" assignTo="{!strPriority}" value=""/>
+            </apex:actionFunction>
+            <apex:actionFunction name="deleteContactAF" action="{!deleteGS}" rerender="contactTable" oncomplete="deleteBindFunc()">
+                <apex:param name="index" assignTo="{!intDeleteIndex}" value=""/>
+            </apex:actionFunction> 
+        </apex:form>
+        <!-- REQUIRED SLDS WRAPPER -->
+      <div class="slds">    
+        <!-- MASTHEAD -->
+            <p class="slds-text-heading--label slds-m-bottom--small">Salesforce Lightning Design System Using ALJS and Javascript</p>
+        <!-- / MASTHEAD -->    
+    
+        <!-- PAGE HEADER -->
+        <div class="slds-page-header" role="banner">
+        <!-- PAGE HEADER TOP ROW -->
+            <div class="slds-grid">
+            <!-- PAGE HEADER / ROW 1 / COLUMN 1 -->
+                <div class="slds-col">
+    
+                  <!-- HEADING AREA -->
+                  <!-- MEDIA OBJECT = FIGURE + BODY -->
+                      <div class="slds-media">
+                        <div class="slds-media__figure">
+                          <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-standard-user">
+                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#user')}"></use>
+                          </svg>
+                        </div>
+                        <div class="slds-media__body">
+                          <p class="slds-text-heading--label">Opportunity</p>
+                          <h1 class="slds-text-heading--medium">Test Opportunity</h1>
+                        </div>
+                
+                      </div>
+                  <!-- / MEDIA OBJECT -->
+                  <!-- HEADING AREA -->
+    
+                </div>
+            <!-- / PAGE HEADER / ROW 1 / COLUMN 1 -->
+    
+            <!-- PAGE HEADER / ROW 1 / COLUMN 2 -->
+                <div class="slds-col slds-no-flex slds-align-middle">
+                  <div class="slds-button-group" role="group">
+                    <button class="slds-button slds-button--neutral" id= "modal" data-aljs-show="modal-1"> New Contact</button>
+                    <button class="slds-button slds-button--neutral"> More</button>
+                  </div>
+                </div>
+            <!-- / PAGE HEADER / ROW 1 / COLUMN 2 -->
+    
+        </div>
+        
+        <!-- / PAGE HEADER TOP ROW -->
+    
+          <!-- / PAGE HEADER DETAIL ROW -->
+          <div class="slds-grid slds-page-header__detail-row">
+        
+          <!-- PAGE HEADER / ROW 2 / COLUMN 1 -->
+          <div class="slds-col--padded slds-size--1-of-3">
+            <dl>
+              <dt><p class="slds-text-heading--label slds-truncate">Account</p></dt>
+              <dd><a href="#">Account Name Of Opportunity</a></dd>
+            </dl>
+          </div>
+        
+          <!-- PAGE HEADER / ROW 2 / COLUMN 2 -->
+          <div class="slds-col--padded slds-size--1-of-3">
+            <dl>
+              <dt><p class="slds-text-heading--label slds-truncate">Amount</p></dt>
+              <dd><a href="#">Total Revenue</a></dd>
+            </dl>
+          </div>
+        
+          <!-- PAGE HEADER / ROW 2 / COLUMN 3 -->
+          <div class="slds-col--padded slds-size--1-of-3">
+            <dl>
+              <dt><p class="slds-text-heading--label slds-truncate">Campaign Source</p></dt>
+              <dd><a href="#">Campaign Name</a></dd>
+            </dl>
+          </div>
+        </div>
+      <!-- / PAGE HEADER DETAIL ROW -->
+    </div>
+    
+        <!-- / PAGE HEADER -->    
+            <!-- PRIMARY CONTENT WRAPPER -->
+            <div class="myapp">
+                <!-- RELATED LIST CARDS-->
+                    <div class="slds-grid slds-m-top--large">
+                        <!-- MAIN CARD -->
+                        <div class="slds-col slds-col-rule--right slds-p-right--large slds-size--6-of-12">
+    
+                        <div class="slds-card">
+                            <header class="slds-card__header slds-grid">
+                              <div class="slds-col slds-media slds-media--center">
+                                <div class="slds-media__figure">
+                                  <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--small">
+                                    <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
+                                  </svg>
+                                </div>
+                                <div class="slds-media__body">
+                                  <h3 class="slds-text-heading--small">Contacts</h3>
+                                </div>
+                              </div>
+                              <div class="slds-col slds-no-flex">
+                                <!--<button class="slds-button slds-button--neutral slds-button--small">Add</button>-->
+                              </div>
+                            </header>
+    
+    
+        <!-- CARD BODY = TABLE -->
+        <apex:outputPanel id="contactTable">
+        <section class="slds-card__body">
+          <div class="slds-scrollable--x">
+            <table class="slds-table slds-table--bordered slds-max-medium-table--stacked-horizontal">
+              <thead>
+                <tr class="slds-no-hover">
+                  <th class="slds-text-heading--label slds-size--1-of-4" scope="col"><strong>Name</strong></th>
+                  <th class="slds-text-heading--label slds-size--1-of-4" scope="col"><strong>Company</strong></th>
+                  <th class="slds-text-heading--label slds-size--1-of-4" scope="col"><strong>Title</strong></th>
+                  <th class="slds-text-heading--label slds-size--1-of-4" scope="col"><strong>Email</strong></th>
+                  <th class="slds-row-action" scope="col">
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <apex:variable var="index" value="{!0}"/> 
+                <apex:repeat value="{!lstcontacts}" var="d">
+                <tr class="slds-hint-parent">
+                  <td class="slds-size--1-of-4" data-label="Name">{!d.FirstName}</td>
+                  <td class="slds-size--1-of-4" data-label="Company">{!d.LastName}</td>
+                  <td class="slds-size--1-of-4" data-label="Title">{!d.Title}</td>
+                  <td class="slds-size--1-of-4" data-label="Email">{!d.Email}</td>
+                  <td>
+                    <button class="slds-button slds-button--icon-border-filled slds-button--icon-border-small deleteButton" data-delete-Index="{!index}">
+                      <svg aria-hidden="true" class="slds-button__icon slds-button__icon--warning slds-button__icon--small">
+                        <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility-sprite/svg/symbols.svg#delete')}"></use>
+                      </svg>
+                      <span class="slds-assistive-text">Show More</span>
+                    </button>
+                  </td>
+                </tr>
+                <apex:variable var="index" value="{!index+1}"/>
+                </apex:repeat>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        </apex:outputPanel>
+        <!-- / CARD BODY = SECTION + TABLE -->
+        <footer class="slds-card__footer">
+          <a href="#">View All</a>
+        </footer>
+      </div>
+    </div>
+                 <!-- / MAIN CARD -->
+                <!-- COMPACT CARD Right Side-->
+                <div class="slds-col slds-p-left--large slds-size--6-of-12">
+                    <div class="slds-form-element">
+                    <div class="slds-picklist--draggable slds-grid" data-aljs="multi-select">
+                        <div class="slds-form-element">
+                            <span class="slds-form-element__label" aria-label="select-1">UnSelected Opps</span>
+                            <div class="slds-picklist slds-picklist--multi" data-aljs-multi-select="unselected">
+                                <ul class="slds-picklist__options slds-picklist__options--multi shown"></ul>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-grid--vertical">
+                            <button class="slds-button slds-button--icon-container" data-aljs-multi-select="unselect">
+                                <svg aria-hidden="true" class="slds-button__icon">
+                                    <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility-sprite/svg/symbols.svg#left')}"></use>
+                                    
+                                </svg>
+                                <span class="slds-assistive-text">Pick list</span>
+                            </button>
+                            <button class="slds-button slds-button--icon-container" data-aljs-multi-select="select">
+                                <svg aria-hidden="true" class="slds-button__icon">
+                                    <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility-sprite/svg/symbols.svg#right')}"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Pick list</span>
+                            </button>
+                        </div>
+                        <div class="slds-form-element">
+                            <span class="slds-form-element__label" aria-label="select-2">Selected Opps</span>
+                            <div class="slds-picklist slds-picklist--multi" data-aljs-multi-select="selected">
+                                <ul class="slds-picklist__options slds-picklist__options--multi shown"></ul>
+                            </div>
+                        </div>
+                        <div class="slds-grid slds-grid--vertical">
+                            <button class="slds-button slds-button--icon-container" data-aljs-multi-select="move-up">
+                                <svg aria-hidden="true" class="slds-button__icon">
+                                    <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility-sprite/svg/symbols.svg#up')}"></use>
+                                    
+                                </svg>
+                                <span class="slds-assistive-text">Pick list</span>
+                            </button>
+                            <button class="slds-button slds-button--icon-container" data-aljs-multi-select="move-down">
+                                <svg aria-hidden="true" class="slds-button__icon">
+                                    <use xlink:href="{!URLFOR($Resource.SLDS0102, 'assets/icons/utility-sprite/svg/symbols.svg#down')}"></use>
+                                </svg>
+                                <span class="slds-assistive-text">Pick list</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <!-- / COMPACT CARD -->
+            </div>
+              <!-- / RELATED LIST CARDS -->
+            </div>
+            <!-- / PRIMARY CONTENT WRAPPER -->   
+            
+            <!-- / MODAL CONTENT START-->    
+    
+            <div aria-hidden="true" role="dialog" class="slds-modal slds-fade-in-open slds-hide" id="modal-1">
+                <div class="slds-modal__container">
+                    <div class="slds-modal__header">
+                        <h2 class="slds-text-heading--medium">New Contact</h2>
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close" data-aljs-dismiss="modal">
+                            <svg aria-hidden="true" class="slds-button__icon slds-button__icon--large">
+                                <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#close')}"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                    </div>
+                    <div class="slds-modal__content">
+                        <h3 class="slds-section-title--divider">Section Information</h3>
+                          <div class="slds-form--stacked slds-p-around--medium slds-m-bottom--x-small">
+                            <div class="slds-form-element">
+                              <label class="slds-form-element__label" for="inputNameSample1">Title</label>
+                              <div class="slds-form-element__control">
+                                <input id="Title" class="slds-input" type="text" placeholder="Title" />
+                              </div>
+                            </div>
+                            <div class="slds-form-element">
+                              <label class="slds-form-element__label" for="inputNameSample2">First Name</label>
+                              <div class="slds-form-element__control">
+                                <input id="FirstName" class="slds-input" type="text" placeholder="First Name" value="{!strfirstName}" />
+                              </div>
+                            </div>
+                            <div class="slds-form-element">
+                              <label class="slds-form-element__label" for="inputNameSample3">Last Name</label>
+                              <div class="slds-form-element__control">
+                                <input id="LastName" class="slds-input" type="text" placeholder="Last Name" value="{!strlastName}"/>
+                              </div> 
+                            </div>
+                            
+                              <div class="slds-form-element">
+                                <div class="slds-lookup" data-select="single" data-scope="single">
+                                <div class="slds-form-element">
+                                    <label class="slds-form-element__label" for="lookup-1">Account Name</label>
+                                    <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                                        <svg aria-hidden="true" class="slds-input__icon">
+                                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#search')}"></use>
+                                        </svg>
+                                        <input id="lookup-1" class="slds-input" type="text" placeholder="Click to View Accounts" aria-autocomplete="list" role="combobox" aria-expanded="true" aria-activedescendant=""/>
+                                        <input type="hidden" id="searchAccountId" value="{!strselectedCompany}"/>
+                                    </div>
+                                </div>  
+                            </div>
+                            </div>
+                            
+                            <div class="slds-form-element"> 
+                                <label class="slds-form-element__label" for="lookup">Last Payment Date</label>
+                                   <div class="slds-input-has-icon slds-input-has-icon--right">
+                                        <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default" style="cursor: pointer;">
+                                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#event')}"></use>
+                                        </svg> 
+                                        <div class="slds-form-element__control">
+                                            <input id="date" class="slds-input" type="text" placeholder="MM/DD/YYYY" label="Date Picker Label" value="{!strDate}"/>
+                                        </div>
+                                    </div>
+                             </div>
+                            <div class="slds-form-element slds-m-top--medium large">
+                              <label class="slds-form-element__label" for="select-01">Priority</label>
+                                <div class="slds-picklist" aria-expanded="true" id="Industry">
+                                <button class="slds-button slds-button--neutral slds-picklist__label" aria-haspopup="true">
+                                        <span class="slds-truncate">Select an Option</span>
+                                        <svg aria-hidden="true" class="slds-icon">
+                                            <use xlink:href="{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#down')}"></use>
+                                        </svg>
+                                 </button>
+                                 <div class="slds-dropdown slds-dropdown--left slds-dropdown--menu slds-hide" multiple="true">
+                                        <ul class="slds-dropdown__list" role="menu">
+                                            <apex:repeat value="{!Priorities}" var="val">
+                                                <li id="{!val.label}" class="slds-dropdown__item">
+                                                    <a href="#" role="menuitemradio">
+                                                        {!val.label}
+                                                    </a>
+                                                </li>
+                                            </apex:repeat>
+                                            
+                                        </ul>
+                                    </div>
+                              </div>
+                            </div>
+                            <div class="slds-form-element">
+                              <label class="slds-form-element__label" for="inputSample2">Email</label>
+                              <div class="slds-form-element__control">
+                                <input id="Email" class="slds-input" type="text"  placeholder="Enter your Email.." value="{!stremail}"/>
+                              </div>
+                            </div>
+                             <div class="slds-form-element">
+                              <label class="slds-form-element__label" for="inputNameSample2">Phone</label>
+                              <div class="slds-form-element__control">
+                                <input id="Phone" class="slds-input" type="text" placeholder="Your Phone no." value="{!strphone}" />
+                              </div>
+                            </div>
+                          </div>
+                                
+                      <span class="slds-form-element__label" id="file-selector-id">Attachment</span>
+                      <div class="slds-form-element__control">
+                        <div class="slds-file-selector slds-file-selector--files">
+                          <div class="slds-file-selector__dropzone">
+                            <input class="slds-file-selector__input slds-assistive-text" accept="image/png" type="file" id="file-upload-input-01" aria-describedby="file-selector-id" />
+                            <label class="slds-file-selector__body" for="file-upload-input-01">
+                              <span class="slds-file-selector__button slds-button slds-button--neutral">
+                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon--left">
+                                  <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#upload"></use>
+                                </svg>Upload Files</span>
+                              <span class="slds-file-selector__text slds-medium-show">or Drop Files</span>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                     </div>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--neutral" data-aljs-dismiss="modal">Cancel</button>
+                            <button class="slds-button slds-button--neutral slds-button--brand" data-aljs-dismiss="modal" onclick="validate();">Save</button>
+                        </div>
+                </div>
+            </div>
+            <!-- / MODAL CONTENT END -->    
+    
+            <!-- FOOTER -->
+            <footer role="contentinfo" class="slds-p-around--large">
+              <!-- LAYOUT GRID -->
+              <div class="slds-grid slds-grid--align-spread">
+                <p class="slds-col">Salesforce Lightning Design System Using ALJS Example</p>
+                <p class="slds-col">&copy; Nikhil</p>
+              </div>
+              <!-- / LAYOUT GRID -->
+            </footer>
+            <!-- / FOOTER --> 
+    
+      </div>
+      <!-- / REQUIRED SLDS WRAPPER -->    
+    </body>    
+
+<!-- JAVASCRIPT -->
+<script>
+    var j$ = jQuery.noConflict();
+    var assets = '{!URLFOR($Resource.SLDS0102)}';
+      
+    //ALJS Initialization   
+    j$.aljsInit({
+      assetsLocation: assets,
+      scoped: true
+    });
+
+    j$(document).ready(function() {
+    // ALJS Lookup
+    j$('#lookup-1').lookup({
+        items:{!autoCompleteArray},
+        objectIconUrl: '{!URLFOR($Resource.SLDS0102, '/assets/icons/utility-sprite/svg/symbols.svg#account')}',
+        showSearch: true,
+        onChange: function(rec) {
+            console.log('===', j$('[id$=searchAccountId]'))
+            j$('[id$=searchAccountId]').val(rec.id); 
+        }
+    });
+
+    //Initializing modal
+    j$('[id="modal"]').modal();
+    
+    //Initializing Datepicker with options To The SLDS Input on document ready.
+    j$('#date').datepicker({
+    onChange: function(datepicker) 
+    {
+        j$('#SelectedDate').html('Selected Date: <strong>'+datepicker.selectedFullDate._i+'</strong>');
+    }
+    });
+  
+  //Initializing Picklist with options To The SLDS Input on document ready.
+    j$('#Industry').picklist({
+        onChange: function(obj1) { 
+          console.log(obj1);  
+         }
+    });
+    deleteBindFunc();
+    });
+
+    function deleteBindFunc() {
+         j$('.deleteButton').click(function(event){
+            console.log('delete Index', j$(this).attr('data-delete-Index'))
+            deleteContactAF(parseFloat(j$(this).attr('data-delete-Index')));
+        }); 
+    }
+    //Initializing MUlti - Picklist with options
+    j$(document).ready(function() {
+     
+        j$('[data-aljs="multi-select"]').multiSelect({
+            unselectedItems: JSON.parse('{!autoCompleteArrayMultiSelect}')
+        });
+        
+    });
+</script>
+  <script>
+      function validate() 
+        { 
+            SaveFunc(j$('#FirstName').val(),
+                     j$('#LastName').val(),
+                     j$('#Email').val(),
+                     j$('#Phone').val(),
+                     j$('#searchAccountId').val(),
+                     j$('#date').val(),
+                     j$('#Title').val(),
+                     j$('#Industry > button > span[class="slds-truncate"]').html().toString().trim());
+        }
+        
+  </script>
+<!-- / JAVASCRIPT -->    
+
+</html>
+</apex:page>

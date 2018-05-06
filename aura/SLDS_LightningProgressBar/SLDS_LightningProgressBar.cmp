@@ -1,0 +1,47 @@
+<aura:component access="GLOBAL">
+    
+    <aura:attribute name="percentage" type="String" default="0%" description="The perecentage state of the top progress bar"></aura:attribute>    
+    
+    
+    <div class="slds-container--center slds-container--medium progress-component">
+        <div class="slds-m-around--medium">
+            <div class="slds-wizard" role="navigation">
+                <ol class="slds-wizard__list">
+                    <li class="slds-wizard__item slds-is-active">
+                        <a href="javascript:void(0);" class="slds-wizard__link">
+                            <span class="slds-wizard__marker"></span>
+                            <span class="slds-wizard__label slds-text-title--caps slds-truncate">Phase 1</span>
+                        </a>
+                    </li>     
+                    <li class="slds-wizard__item slds-is-active">
+                        <a href="javascript:void(0);" class="slds-wizard__link">
+                            <span class="slds-wizard__marker"></span>
+                            <span class="slds-wizard__label slds-text-title--caps slds-truncate">Phase 2</span>
+                        </a>
+                    </li>
+                    <li class="slds-wizard__item slds-is-active">
+                        <a href="javascript:void(0);" class="slds-wizard__link">
+                            <span class="slds-wizard__marker"></span>
+                            <span class="slds-wizard__label slds-text-title--caps slds-truncate">Phase 3</span>
+                        </a>
+                    </li>       
+                    <li class="slds-wizard__item slds-is-active">
+                        <a href="javascript:void(0);" class="slds-wizard__link">
+                            <span class="slds-wizard__marker"></span>
+                            <span class="slds-wizard__label slds-text-title--caps slds-truncate">Phase 4</span>
+                        </a>
+                    </li>
+                    <li class="slds-wizard__item slds-is-active">
+                        <a href="javascript:void(0);" class="slds-wizard__link">
+                            <span class="slds-wizard__marker"></span>
+                            <span class="slds-wizard__label slds-text-title--caps slds-truncate">Phase 5</span>
+                        </a>
+                    </li>
+                </ol>
+                <span class="slds-wizard__progress">
+                    <span class="slds-wizard__progress-bar" style="{!'width:'+v.percentage}"></span>
+                </span>
+            </div>	
+        </div>    
+    </div>
+</aura:component>

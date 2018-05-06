@@ -1,0 +1,23 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" standardController="Opportunity" extensions="OpportunityExtension">
+
+<apex:includeLightning />
+
+    <div id="lightning" />
+
+    <script>
+    //Tell your Visualforce page to use ExposeVF Lightning app
+        $Lightning.use("c:LightningFieldSetViewForVF", function() {
+          $Lightning.createComponent("c:FieldSetOutputView",
+          {id:'tstID', ObjectName: 'Opportunity',className:'form-control',FieldSet:'FieldSetLigthning',recordId: '{!currOpportunityId}'
+           ,IconPath:'/resource/SLDS090/assets/icons/standard/opportunity_120.png', RecordName:'{!objOPpor.Name}'}
+          ,
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+        console.log('===', JSON.parse('{!objssss}'));
+    </script>
+    
+
+</apex:page>

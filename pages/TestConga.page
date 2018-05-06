@@ -1,0 +1,3 @@
+<apex:page >
+  <apex:outputLink target="_blank" value="https://www.appextremes.com/apps/Conga/Composer.aspx?sessionId={!$Api.Session_ID}&serverUrl={!$Api.Partner_Server_URL_80}&id={!$User.Id}&QueryId=[cons]a0U28000004kUDu&TemplateId=a0c28000004mnix?pv0=&OCNR=1">Investment Pipeline Conga Report</apex:outputlink> 
+</apex:page>

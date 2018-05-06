@@ -1,0 +1,5 @@
+<aura:component >
+	<ltng:require styles="/resource/SLDS090/assets/styles/salesforce-lightning-design-system.min.css"/>
+    <force:recordView aura:id="edit" recordId="a0628000000eMfT"/>
+	<ui:button label="Save" press="{!c.save}"/>
+</aura:component>

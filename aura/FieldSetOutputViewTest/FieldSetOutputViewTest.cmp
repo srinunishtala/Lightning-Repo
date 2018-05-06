@@ -1,0 +1,48 @@
+<aura:component controller="SObjectLightningController" implements="flexipage:availableForAllPageTypes" access="global">
+ <ltng:require styles="/resource/SLDS090/assets/styles/salesforce-lightning-design-system.min.css"/>
+    <aura:attribute name="values" type="Object[]"/>
+    <aura:attribute name="FieldSet" type="string"/>
+    <aura:attribute name="isEdit" type="boolean" default="false"/>
+    <aura:attribute name="ObjectName" type="string"/>
+    <aura:attribute name="newContact" type="contact" />
+    <aura:attribute name="SObjectList" type="contact[]"/>
+    
+    <div class="container"> <!--style="background-color: bisque;"-->
+        <button class="slds-button slds-button--neutral slds-button--small" onclick="{!c.editSObject}" >Edit View</button>
+        <div>
+        <aura:if isTrue="{!v.isDisplay}">
+          <div>  
+            <div class="slds-modal slds-fade-in-open" aria-hidden="false" role="dialog">
+        		<div class="slds-modal__container">
+                    <div class="slds-modal__header" style="border-top:2px solid #d8dde6;border-right:2px solid #d8dde6;border-left:2px solid #d8dde6;">
+                      <h1 class="slds-text-heading--medium" title="Opportunity">Edit </h1>
+                        <button class="slds-button slds-button--icon-inverse slds-modal__close slds-icon__container" onclick="{!c.closeEdit}">
+                            <c:svg class="slds-icon slds-icon-standard-account" xlinkHref="/resource/SLDS090/assets/icons/action-sprite/svg/symbols.svg#close" />
+                            <span class="slds-assistive-text">Close</span>
+                        </button>
+                     </div>
+                    <div class="slds-modal__content" style="border-left:2px solid #d8dde6;border-right:2px solid #d8dde6">  
+                        <form class="slds-form--stacked">
+                            <div class="slds-form-element slds-is-required">
+                                <div class="slds-form-element__control">
+                                        {!v.form}
+                                    <div class="slds-form-element__control" aura:id="ElementHere"></div>
+                                </div>
+                            </div>
+                         </form>
+            		</div>
+                    <div class="slds-modal__footer" style="border-bottom:2px solid #d8dde6;border-right:2px solid #d8dde6;border-left:2px solid #d8dde6;">
+                        <div class="slds-x-small-buttons--horizontal">
+                          <button class="slds-button slds-button--neutral">Cancel</button>
+                          <button class="slds-button slds-button--neutral slds-button--brand">Save</button>
+                        </div>
+            		</div>
+				</div>
+        	</div>
+            <div class="slds-backdrop slds-backdrop--open"></div>
+          </div>    
+        </aura:if>
+        </div>
+    </div>
+  
+</aura:component>

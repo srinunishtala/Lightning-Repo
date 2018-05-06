@@ -1,0 +1,5 @@
+<design:component label=" InputLookUp">
+    <design:attribute name="type" label="Object Name" description="Sobject Type" required="true"/>
+    <design:attribute name="value" label="Id" description="Source / Destination value" />
+    <design:attribute name="FieldsToDisplay" label="Fields to Display" description="It is used to fetch the S-object's other fields name which user wants to display "/>  
+</design:component>

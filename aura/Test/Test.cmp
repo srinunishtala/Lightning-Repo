@@ -1,0 +1,4 @@
+<aura:component implements="force:appHostable,forceCommunity:availableForAllPageTypes" access="global" >
+	<force:recordEdit aura:id="edit" recordId="a042800000jvQOe"/>
+	<ui:button label="Save" press="{!c.save}"/>
+</aura:component>

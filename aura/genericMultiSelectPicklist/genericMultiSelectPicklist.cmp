@@ -1,0 +1,39 @@
+<aura:component controller="genericMultiSelectPicklist" 
+                implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:appHostable" 
+                access="global">
+
+	<ltng:require styles="/resource/SLDS0102/assets/styles/salesforce-lightning-design-system.min.css" />
+    
+    <aura:attribute name="objName" type="String" default="Contact" access="global"/>
+    <aura:attribute name="fieldAPIName" type="String" default="Test_Multi__c" access="global"/>
+    <aura:attribute name="addSelectedValues" type="String" access="global"/>
+    <aura:attribute name="removeSelectedValues" type="String" access="global"/>
+ 
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-form-element">
+	<div class="slds-picklist--draggable slds-grid" data-aljs="multi-select">
+		<div class="slds-form-element">
+			<span class="slds-form-element__label" aria-label="select-1">UnSelected Values</span>
+			<div class="slds-picklist slds-picklist--multi" data-aljs-multi-select="unselected">
+				<ul class="slds-picklist__options slds-picklist__options--multi shown">
+					<ui:inputSelect multiple="true" value="{!v.addSelectedValues}" aura:id="leftSelectedValues" class="dynamic oSelect" />
+				</ul>
+			</div>
+		</div>
+		<div class="slds-grid slds-grid--vertical">
+			<ui:button aura:id="btnMove" class="slds-button slds-button--icon-container button" label="&gt;&gt;" press="{!c.shiftRight}"/>
+			<ui:button aura:id="btnRemove" class="slds-button slds-button--icon-container button" label="&lt;&lt;" press="{!c.shiftLeft}"/>
+		</div>
+		<div class="slds-form-element">
+			<span class="slds-form-element__label" aria-label="select-2">Selected Values</span>
+			<div class="slds-picklist slds-picklist--multi" data-aljs-multi-select="selected">
+				<ul class="slds-picklist__options slds-picklist__options--multi shown">
+					<ui:inputSelect multiple="true" value="{!v.removeSelectedValues}" aura:id="rightSelectedValues" class="oSelect" />
+				</ul>
+			</div>
+		</div>
+		
+	</div>
+</div>
+</aura:component>

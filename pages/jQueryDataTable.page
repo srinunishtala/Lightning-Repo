@@ -1,0 +1,56 @@
+<apex:page Controller="jQueryDataTableController" readOnly="true" sidebar="false" showHeader="false" standardStylesheets="fasle">
+	<head>
+		<apex:includescript value="//code.jquery.com/jquery-1.11.1.min.js" / >
+		<apex:includescript value="//cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js" />
+		<apex:stylesheet value="//cdn.datatables.net/1.10.4/css/jquery.dataTables.css" />
+		<script>
+			j$ = jQuery.noConflict();
+			j$(document).ready( function () {
+				var contactTable = j$('[id$="contacttable"]').DataTable({
+					order: [[2, 'asc']],
+					
+					initComplete: function() {
+						var api = this.api();
+						var select = j$('[id$=accountSelect]');
+						api.column(0).data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );   
+					}
+				});
+
+				/*j$('[id$=accountSelect]').change(function() {
+					var val = j$.fn.dataTable.util.escapeRegex(
+						j$(this).val()
+					);
+					contactTable.column(0)
+						.search( val == 'All' ? '' : '^'+val+'$', true, false )
+						.draw();
+				});*/
+			});
+		</script>
+	</head>
+	<body>
+		<!--<select id="accountSelect"><option value="All"></option></select>-->
+
+		<table id="contacttable" class="display">
+			<thead>
+				<tr>
+					<th>Account</th>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Phone</th>
+				</tr>
+			</thead>
+			<tbody>
+				<apex:repeat value="{!contactList}" var="contact">
+					<tr>
+						<td>{!contact.Account.Name}</td>
+						<td>{!contact.FirstName}</td>
+						<td>{!contact.LastName}</td>
+						<td>{!contact.Phone}</td>
+					</tr>
+				</apex:repeat>
+			</tbody>
+		</table>
+	</body>
+</apex:page>

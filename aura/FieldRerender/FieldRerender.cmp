@@ -1,0 +1,22 @@
+<aura:component >
+    
+    <!-- HANDLERS START-->
+    <aura:handler name="init" value="{!this}" action="{!c.FieldToBeRendered}" />
+    <!-- HANDLERS END-->
+    
+    <!-- ATTRIBUTES START-->
+    <aura:attribute name="TagToRender" type="string"/>
+    <aura:attribute name="TagAttributes" type="string"/>
+    <aura:attribute name="id" type="String"/>
+    <aura:attribute name="TagLabel" type="string"/>
+    <aura:attribute name="isEditable" type="boolean"></aura:attribute>
+    <!-- ATTRIBUTES END-->
+    
+    
+    <div id="{!v.id}" class="slds-has-divider--bottom" style="border-bottom:1px solid rgb(216, 221, 230);">
+        <aura:if isTrue="{!!v.isEditable}">
+        	<span class="slds-form-element__label">{!v.TagLabel}</span> 
+        </aura:if>    
+        <div aura:id="tagspace" class="slds-form-element__control"></div>
+    </div>    
+</aura:component>

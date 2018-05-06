@@ -1,0 +1,89 @@
+<aura:component controller="SObjectLightningController" implements="forceCommunity:availableForAllPageTypes,flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName" access="global">
+    
+<!-- Required Scripts/Styles -->
+  <ltng:require styles="/resource/SLDS0102/assets/styles/salesforce-lightning-design-system.min.css, /resource/jQueryUILookUp/jQuery/jquery-ui.css" 
+                scripts=" /resource/LightningLookup/LightningLookup/jquery-2.1.1.min.js, /resource/jQueryUILookUp/jQuery/jquery-ui.js, /resource/RequireJS"
+                afterScriptsLoaded="{!c.doInit}"
+                />
+    
+<!-- HANDLERS START-->
+    <aura:handler event="aura:waiting" action="{!c.showSpinner_op}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner_op}"/>
+<!-- HANDLERS END-->    
+    
+<!-- ATTRIBUTES START-->  
+    <aura:attribute name="showSpinner" type="Boolean" default="true" />
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="FieldSet" type="string"/>
+    <aura:attribute name="ObjectName" type="string"/>
+    <aura:attribute name="SObjectList" type="contact[]"/>
+    <aura:attribute name="RecordName" type="string"/>
+    <aura:attribute name="IconPath" type="string" default="/resource/SLDS0102/assets/icons/standard/opportunity_120.png"
+                    								description="The static resource path to the svg icon to use."/>
+    <aura:attribute name="pluralLabel" type="String" required="true" 
+        							description="The plural label to assign to the lookup, eg: Accounts" />
+    
+<!-- ATTRIBUTES END --> 
+    
+<!-- PAGE HEADER START-->
+	<div class="slds-page-header" role="banner">
+	<!-- LAYOUT GRID -->
+		<div class="slds-grid">
+			<!-- GRID COL -->
+    			<div class="slds-col">
+      				<!-- HEADING AREA -->
+						<!-- MEDIA OBJECT = FIGURE + BODY -->
+							<div class="slds-media">
+                              <div class="slds-media__figure">
+                                <span class="slds-avatar slds-avatar--large">
+                                    <img src="{!v.IconPath}" alt="" />
+                                </span>
+                              </div>
+                              <div class="slds-media__body">
+                                <p class="slds-text-heading--label">{!v.ObjectName}</p>
+                                <h1 class="slds-text-heading--medium">{!v.RecordName}</h1>
+                              </div>
+							</div>
+						<!-- / MEDIA OBJECT -->
+					<!-- /HEADING AREA -->
+    			</div>
+                <!-- ACTION BUTTONS -->
+                        <div class="slds-col slds-no-flex slds-align-middle">
+                          <div class="slds-button-group" role="group">
+                            <button class="slds-button slds-button--neutral" onclick="{!c.callEditModal}">
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                <!-- / ACTION BUTTONS -->
+		</div>
+	<!-- / LAYOUT GRID -->
+	</div>
+<!-- / PAGE HEADER END -->
+    
+<!-- PRIMARY CONTENT WRAPPER START-->
+	<div class="myapp slds-m-top--large">
+         <div aura:id="DetailSpinner" style="{!v.isdisplay}" class="$z-index-dialog">
+                <!--Loading Section Start-->
+                <div class ="salesforceSource_blurybackground"></div>
+                    <div id="ManageMembersViewport_loading" class="waitingSearchDiv" style="width: 100%; height: 80%;">
+                        <div class="waitingHolder">
+                            <table align="center" valign="top" style="width: 100%;">
+                                <div class="slds-spinner-medium" >
+                                    <c:Spinner type="spin" width="64" height="64" color="orange" show="{!v.showSpinner}"/>
+                                	
+                                    
+                                    <span class="waitingDescription"><b>Loading...</b></span>
+                                </div>
+                            </table>
+                        </div>
+                    </div>
+             <!--Loading Section End-->
+        	</div>
+         <ul aura:id="detailView" class="slds-list--vertical slds-has-cards"></ul>
+         <ul aura:id="editModal"></ul>
+           
+     </div>
+<!-- PRIMARY CONTENT WRAPPER END-->   
+  
+</aura:component>

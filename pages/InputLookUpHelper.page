@@ -1,0 +1,60 @@
+<!--<apex:page >
+  <apex:includeLightning />
+    
+    <apex:form>
+        <apex:actionFunction name='reRenderLightning' rerender='lightningComponent'/>
+    </apex:form>
+    <label for="fieldName">Fields</label>
+    <input type="text" onchange="reRenderLightning()" id="fieldName"/> 
+    <label for="objectName">Object</label>
+    <input type="text" onchange="reRenderLightning()" id="objectName"/>
+    
+    <apex:outputPanel id="lightningComponent">
+    <div id="lightning" />
+    <script>
+    //Tell your Visualforce page to use ExposeVF Lightning app
+        var fields = document.getElementById('fieldName');
+        var object = document.getElementById('objectName');
+        $Lightning.use("c:LightningLookUpOutput", function() {
+          $Lightning.createComponent("c:InputLookupHelper",
+          {id:'tstID', type:"Opportunity" ,FieldsToDisplay:'accountid;'},
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+    </apex:outputPanel>
+
+</apex:page>-->
+<apex:page >
+  <apex:includeLightning />
+    <apex:form >
+        <apex:actionFunction name="reRenderLightning" rerender="lightningComponent"/>
+    </apex:form>
+    
+    <label for="fieldName">Fields</label>
+    <input type="text" onchange="reRenderLightning()" id="fieldName"/> 
+    <label for="objectName">Object</label>
+    <input type="text" onchange="reRenderLightning()" id="objectName"/>
+    
+    <apex:outputPanel id="lightningComponent">
+    <div id="lightning" />
+    
+    <script>
+    var fields = document.getElementById('fieldName').value;
+    var object = document.getElementById('objectName').value;
+        
+    //Tell your Visualforce page to use ExposeVF Lightning app
+    if(fields != '' && object != '')
+        $Lightning.use("c:LightningLookUpOutput", function() {
+          $Lightning.createComponent("c:InputLookUpHelper",
+          {id:'tstID', type:object ,FieldsToDisplay:fields},
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+    </apex:outputPanel>
+</apex:page>

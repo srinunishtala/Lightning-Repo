@@ -1,0 +1,21 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" standardController="Account">
+
+<apex:includeLightning />
+
+    <div id="lightning" />
+    
+    <script>
+        $Lightning.use("c:LightningFieldSetViewForVF", function() {
+          $Lightning.createComponent("c:FieldSetOutputView",
+          {id:'tstID', ObjectName: 'Account',className:'form-control',FieldSet:'FieldSetLightning',recordId: '{!Account.Id}'
+           ,IconPath:'/resource/SLDS0102/assets/icons/standard/account_60.png', RecordName:'{!Account.Name}'}
+          ,
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+
+
+</apex:page>

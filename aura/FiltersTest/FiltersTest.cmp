@@ -1,0 +1,129 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes" 
+                
+                access="global" >
+	<!--Loading Static Resources Section Start-->
+    	<ltng:require styles="/resource/SLDS090/assets/styles/salesforce-lightning-design-system-ltng.css" />
+    
+    <!--Loading Static Resources Section End-->
+    
+    
+    <!--Loading Attributes Section Start-->
+    <aura:attribute name="debugMode" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="isSortBySelected" type="Boolean" default="false" access="global"/>
+    <aura:attribute name="currIdea" type="Idea" default="{'sobjectType' : 'Idea'}" access="global"/>
+    <aura:attribute name="searchString" type="String" default="" access="global"/>
+    <aura:attribute name="isBrowserCheck" type="Boolean" default="false" access="global"/>
+    
+    <aura:attribute name="sitePrefix" type="String" default="/ideaslc" access="global"/>
+    <aura:attribute name="sitePath" type="String" access="global"/>
+    
+    <aura:attribute name="topicNamesList" type="String[]" access="global"/>
+    <aura:attribute name="showTopicFilter" type="Boolean" default="true" access="global"/>
+    
+    <aura:attribute name="categoriesSet" type="String[]" access="global"/>
+    <aura:attribute name="showCategoryFilter" type="Boolean" default="true" access="global"/>
+    
+    <aura:attribute name="statusList" type="String[]" access="global"/>
+    <aura:attribute name="showStatusFilter" type="Boolean" default="true" access="global"/>
+    
+    <aura:attribute name="ThemesList" type="String[]" access="global"/>
+    <aura:attribute name="showThemesFilter" type="Boolean" default="true" access="global"/>
+    
+    <aura:attribute name="sortBy" default="Popular Ideas" type="String" access="global"/>
+    <aura:attribute name="showSortByFilter" type="Boolean" default="true" access="global"/>
+	<!--Loading Attributes Section End-->
+    
+    <!--Checkbox Section Start-->
+    <div class="slds-grid filterBox">
+        <div class="slds-col slds-float--left">
+            <div class="myIdeasCss slds-float--left slds-m-right--small slds-m-bottom--small">
+                <a href="" class="slds-truncate" role="menuitemradio">
+                    <ui:inputCheckbox label="My Ideas" aura:id="myIdeas" class="slds-checkbox--faux ideaLabel" click="{!c.filterByMyIdeas}"/>
+                </a>
+            </div>
+            <div class="slds-float--left slds-m-bottom--small">
+            	<!--Desktop Section With Themes, Stages, Topics and Category Section Start--> 
+                	
+                    <aura:if isTrue="{!v.showStatusFilter}">
+                        <div class="slds-form-element__control slds-float--left">
+                           <ui:inputSelect aura:id="selectedStatus" aura:disabled="false" class="slds-input-select dropdown stage" change="{!c.filterByStatus}">
+                               <ui:inputSelectOption text="Stages" Label="--Stages--" class="default text"/>
+                               <aura:iteration items="{!v.statusList}" var="status">
+                                       <ui:inputSelectOption text="{!status}" Label="{!status}" class="slds-input"/>
+                                </aura:iteration>
+                           </ui:inputSelect>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.showThemesFilter}">
+                        <div class="slds-form-element__control slds-float--left">
+                           <ui:inputSelect aura:id="selectedThemes" aura:disabled="false" class="slds-input-select dropdown sortByThemes" change="{!c.filterByThemes}">
+                               <ui:inputSelectOption text="Themes" Label="--Themes--" class="default text"/>
+                               <aura:iteration items="{!v.themesList}" var="themes">
+                                       <ui:inputSelectOption text="{!themes}" Label="{!themes}" class="slds-input"/>
+                                </aura:iteration>
+                           </ui:inputSelect>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.showTopicFilter}">
+                        <div class="slds-form-element__control slds-float--left">
+                            <ui:inputSelect multiple="false" aura:id="selectedTopic" class="slds-input-select dropdown topic" change="{!c.filterByTopics}">
+                                <ui:inputSelectOption text="Topics" Label="--Topics--" class="default text"/>
+                                <aura:iteration items="{!v.topicNamesList}" var="topic">
+                                    <ui:inputSelectOption text="{!topic}" Label="{!topic}" class="slds-input"/>
+                                </aura:iteration>
+                            </ui:inputSelect>
+                        </div>
+                    </aura:if>
+                    <aura:if isTrue="{!v.showCategoryFilter}">
+                        <div class="slds-form-element__control slds-float--left">
+                           <ui:inputSelect aura:id="categories" aura:disabled="false" class="slds-input-select dropdown categories" change="{!c.filterByCategories}">
+                               <ui:inputSelectOption text="Category" Label="--Categories--" class="default text"/>
+                               <aura:iteration items="{!v.categoriesSet}" var="category">
+                                   <ui:inputSelectOption text="{!category}" Label="{!category}" class="slds-input"/>
+                               </aura:iteration>
+                           </ui:inputSelect>
+                        </div>
+                   </aura:if>
+            	<!--Desktop Section With Themes, Stages, Topics and Category Section End-->
+            </div>
+         
+            <div class="slds-float--right w250 slds-m-bottom--small">
+                <div class="slds-float--left iconListGrid">
+                    <!--Icons for Desktop Section Start-->
+                        <aura:if isTrue="{!!or($Browser.isPhone,$Browser.isIPad,$Browser.isIPhone)}">
+                        <div>
+                            <a href="" class="slds-button slds-button--neutral slds-text-heading--label slds-p-top--x-small slds-p-bottom--x-small customBtn btnActive" onclick="{!c.setListView}" label="List" aura:id="listBTN" >
+                                
+                                
+                            </a>
+                            <a href="" class="slds-button slds-button--neutral slds-text-heading--label slds-p-top--x-small slds-p-bottom--x-small customBtn" onclick="{!c.setGridView}" label="Grid" aura:id="gridBTN">
+                                
+                                
+                            </a>			
+                        </div>
+</aura:if>
+                    <!--Icons for Desktop Section End-->
+                </div>
+                <div class="slds-float--left">
+                    <!--Desktop Section With Sort By Section Start-->
+                        
+                        <aura:if isTrue="{!v.showSortByFilter}">
+                            <div class="slds-form-element__control">
+                                <ui:inputSelect aura:id="sortByInput" multiple="false" class="slds-input-select dropdown sortByOptions" change="{!c.handleSortChange}">
+                                    <ui:inputSelectOption text="Popular Ideas" Label="Popular Ideas" Value="{!if(v.sortBy == 'Popular Ideas','true','false')}"/>
+                                    <ui:inputSelectOption text="Recent Ideas" Label="Recent Ideas" Value="{!if(v.sortBy == 'Recent Ideas','true','false')}"/>
+                                    <ui:inputSelectOption text="Top All-Time" Label="Top All-Time" Value="{!if(v.sortBy == 'Top All-Time','true','false')}"/>
+                                    <ui:inputSelectOption text="Recent Comments" Label="Recent Comments" Value="{!if(v.sortBy == 'Recent Comments','true','false')}"/>
+                                </ui:inputSelect>
+                            </div>
+</aura:if>
+                    
+                    <!--Desktop Section With Sort By Section End-->	
+                </div>
+            </div>
+        </div>
+      <!--Checkbox Section End--> 
+        
+        	
+    </div>
+</aura:component>

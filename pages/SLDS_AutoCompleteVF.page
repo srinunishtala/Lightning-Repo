@@ -1,0 +1,20 @@
+<apex:page standardStylesheets="false" showHeader="false" sidebar="false" standardController="Contact">
+
+<apex:includeLightning />
+
+    <div id="lightning" />
+    
+    <script>
+        $Lightning.use("c:SLDS_SObjectAutoCompleteApp", function() {
+          $Lightning.createComponent("c:SLDS_SObjectAutoComplete",
+          {sObjLabel='Contact' , sObjName='Contact'}
+          ,
+          "lightning",
+          function(cmp) {
+            // do some stuff
+          });
+        });
+    </script>
+
+
+</apex:page>

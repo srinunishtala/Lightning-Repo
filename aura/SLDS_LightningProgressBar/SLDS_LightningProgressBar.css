@@ -1,0 +1,15 @@
+.THIS .slds-wizard .slds-is-active .slds-wizard__marker {
+    background-color:#003a5d!important;
+}
+
+.THIS .slds-wizard__progress-bar {
+    background-color:#003a5d!important;   
+}
+
+.THIS .slds-wizard__progress {
+    z-index:1!important;
+}
+
+.THIS .slds-wizard__marker {
+    z-index:2!important;    
+}

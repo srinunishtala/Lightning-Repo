@@ -1,0 +1,10 @@
+<apex:page >
+  <apex:pageBlock title="Simple Title">
+      <b><i>{!$User.FirstName}</i>.</b>
+       <b><i>{!$User.LastName}</i>.</b>
+        <b><i>{!$User.Title}</i>.</b>
+         <b><i>{!$User.Email}</i>.</b>
+          <b><i>{!$User.Phone}</i>.</b>
+      
+   </apex:pageBlock>
+</apex:page>

@@ -1,0 +1,151 @@
+<apex:page controller="TBN_OpportunityFieldSetController">
+    <apex:form id="frm">
+       
+    
+        <apex:includeScript value="https://code.jquery.com/jquery-1.11.1.min.js"/>
+        <!--<apex:pageBlock title="Opportunity Records" id="myBlock">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Process Selected" action="{!processSelected}" rerender="table"/>
+            </apex:pageBlockButtons>
+
+            <apex:pageBlockTable value="{!lstWrapperOpp}" var="Opp">
+                <apex:column >
+                        <apex:inputCheckbox value="{!Opp.selected}"/>
+                </apex:column>
+                <apex:repeat value="{!$ObjectType.Opportunity.FieldSets.Opp_Field_Set}" var="Op">
+                	<apex:column value="{!Opp.objOpp[Op.fieldPath]}" headerValue="{!Op.label}"/>
+                 </apex:repeat>
+            </apex:pageBlockTable>
+            
+            
+        </apex:pageBlock>-->
+        <apex:pageBlock title="Accounts MutiSelect" id="accountBlock">
+             <apex:panelGrid columns="4" id="multiSelectPanelId">
+                <!-- The Unselected Values Select List -->
+                <apex:selectList id="leftList" value="{!selectedAccountId}" size="10" multiselect="true" style="width:250px">
+                    <apex:selectOptions value="{!lstAccountOptions}"/>
+                </apex:selectList>
+                <!-- The Left and Right Buttons -->
+                <apex:panelGroup layout="block" style="text-align: center; padding:10px;">
+                    
+                    <br/>
+                        <apex:Commandbutton value=" > "  onclick="MoveToRight('{!$Component.leftList}','{!($Component.rightList)}');return false;"/>
+                        <br/><br/>
+                        <apex:Commandbutton value=" < " onclick="MoveToLeft('{!$Component.leftList}','{!$Component.rightList}');return false;"/>
+                        <br/><br/>
+                    
+                </apex:panelGroup>
+                
+                 <!--The Selected Items List -->
+                <apex:selectList id="rightList" value="{!selectedAccounts}" multiselect="true" size="10" style="width:250px" >
+                    <!--<apex:selectOptions value="{!selectedAccountId}" onchange="search()"/>-->
+                </apex:selectList>
+                <apex:actionfunction name="callFuncAF" action="{!check}" rerender="dummy">
+                    <apex:param name="selectedParam" assignTo="{!selectedAccounts}" value=""/>
+                </apex:actionfunction>
+                <button id="pressId" onClick="return pressButton();">Add</button>
+
+                
+                
+                <!--<apex:actionFunction name="sendvaltocontroller" action="{!check}"/>-->
+                <!--<apex:commandButton value="Add" id="myproduct" onclick="selectProd('{!$Component.rightList}');"/>-->
+            </apex:panelGrid>
+        </apex:pageBlock>
+    </apex:form>
+    <script>
+        function MoveToRight(leftPickValues,rightPickValues){
+            var removeOptions = new Array();
+            if(document.getElementById(leftPickValues)!=null && document.getElementById(rightPickValues)!=null){
+                var leftOptions = document.getElementById(leftPickValues); 
+                var rightOptions =document.getElementById(rightPickValues);
+                var iCount=0;
+                
+                for(var i=0;i<leftOptions.options.length;i++){
+                    if(leftOptions.options[i].selected){
+                        if(rightOptions.options.length==1 
+                                        && (rightOptions.options[rightOptions.length-1].value==null 
+                                        || rightOptions.options[rightOptions.length-1].value==''))
+                            rightOptions.options[0] = new Option(leftOptions.options[i].text, leftOptions.options[i].value);
+                        else
+                            rightOptions.options[rightOptions.length] = new Option(leftOptions.options[i].text, leftOptions.options[i].value);
+    
+                        removeOptions[iCount] = leftOptions.options[i].value;
+                        iCount++;
+                    }
+                }
+                for(var i=0;i<removeOptions.length;i++){
+                    for(var j=0;j<leftOptions.length;j++){
+                        if(leftOptions.options[j].value == removeOptions[i]){
+                            leftOptions.remove(j);
+                            break;
+                        }
+                    }
+                }
+            }
+            
+        }
+        function MoveToLeft(leftPickValues,rightPickValues){
+            var removeOptions = new Array();
+            if(document.getElementById(leftPickValues)!=null && document.getElementById(rightPickValues)!=null){
+                var leftOptions = document.getElementById(rightPickValues);
+                var rightOptions = document.getElementById(leftPickValues);
+                var iCount=0;
+                for(var i=0;i<leftOptions.options.length;i++){
+                    if(leftOptions.options[i].selected){
+                        if(rightOptions.options.length==1 
+                                        && (rightOptions.options[rightOptions.length-1].value==null 
+                                        || rightOptions.options[rightOptions.length-1].value==''))
+                                        
+                            rightOptions.options[0] = new Option(leftOptions.options[i].text, leftOptions.options[i].value);
+                        else
+                            rightOptions.options[rightOptions.length] = new Option(leftOptions.options[i].text, leftOptions.options[i].value);
+    
+                        removeOptions[iCount] = leftOptions.options[i].value;
+                        iCount++;
+                    }
+                }
+                for(var i=0;i<removeOptions.length;i++){
+                    for(var j=0;j<leftOptions.length;j++){
+                        if(leftOptions.options[j].value == removeOptions[i]){
+                            leftOptions.remove(j); 
+                            break;
+                        }
+                    }
+                }
+            
+            }
+            
+        }
+       
+        /*function pressButton()
+          {
+              var allSelected = '';
+                $("[id$=rightList] > option").each(function(){
+                allSelected+=allSelected!='' ? '; '+this.value : this.value;
+              });
+              alert(allSelected);
+              callFuncAF(allSelected);
+              return false;
+          }
+        */
+        function pressButton() {
+            var select = document.querySelector('[id$=rightList]').getElementsByTagName('option');
+            var strValues= '';
+            for(var i=0; i < select.length; i++) {
+                //select[i].selected = 'selected';
+                if(select[i].value != '')
+                {
+                    strValues += ';'+ select[i].value;
+                }
+            }
+            //allSelected+=allSelected!='' ? '; '+this.value : this.value;
+            alert(strValues);
+            callFuncAF(strValues);
+            return false;
+            //console.log('Target Called');
+            //callSuppAF(allSelected);
+            
+        }
+  
+    </script>
+</apex:page>

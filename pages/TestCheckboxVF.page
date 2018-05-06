@@ -1,0 +1,47 @@
+<apex:page controller="selectCheckboxDemoController">
+
+<!-- check all columns demo page using action function- it has slow respose-->
+
+ <apex:form >
+
+  <apex:pageblock id="pgblck">
+
+    <apex:pageblocktable value="{!WrapperList}" var="wraprec">
+
+      <apex:column value="{!wraprec.accRec.name}"/>
+
+      <apex:column value="{!wraprec.accRec.accountnumber}"/>
+
+      <apex:column value="{!wraprec.accRec.annualrevenue}"/>
+
+       <apex:column >
+
+         <apex:facet name="header">
+
+           <apex:inputCheckbox onclick="selectall()"/>
+
+         </apex:facet>
+
+        <apex:inputCheckbox value="{!wraprec.checkflag}" />
+
+      </apex:column>
+
+    </apex:pageblocktable>
+
+  </apex:pageblock>
+
+ <apex:actionFunction name="selectallmethod" action="{!selectallnone}" rerender="pgblck"/>       
+
+ </apex:form>
+
+  <!--<script type="text/javascript">
+
+    function selectall() {  
+
+      selectallmethod();
+
+    }    
+
+</script>-->
+
+</apex:page>

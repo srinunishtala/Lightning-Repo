@@ -1,0 +1,6 @@
+<design:component>
+	<design:attribute name="label" label="Object Name" description="Sobject Type" required="true"/>
+    <design:attribute name="pluralLabel" label="Plural of the sObject name" description="Plural label assigned" />
+    <design:attribute name="sObjectAPIName" label="Api Name of sObject" description="API Name of the sObject" required="true"/>
+    <design:attribute name="instanceId" label="instanceId" description="Id to identify instance of the component" />
+</design:component>

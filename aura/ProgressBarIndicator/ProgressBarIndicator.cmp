@@ -1,0 +1,104 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	
+    <ltng:require styles="/resource/SLDS_222/assets/styles/lightning-design-system-ltng.css'}"/>
+    
+    <aura:attribute name="percentage" type="String" default="0%" description="The perecentage state of the top progress bar"></aura:attribute>
+    <aura:attribute name="state" type="Integer" access="GLOBAL" default="1" />
+    
+    <!-- Progress Bar Section Start-->
+            <div class="slds-progress">
+                <ol class="slds-progress__list"> 
+                    <li class="{!v.state == 1 ? 'slds-progress__item slds-is-active' : 'slds-progress__item'}" id="progress1">
+                        <button class="{!v.state > 1 ? 'slds-button slds-button--icon slds-progress__marker progressBarButton slds-progress__marker--icon' : 'slds-button slds-button--icon slds-progress__marker progressBarButton'}" aria-describedby="step-1-tooltip" title="settings">
+                            <aura:if isTrue="{!v.state > 1}">
+                                <span style="fill:#1589ee;">
+                                    <lightning:icon iconName="utility:success" size="x-small" class="slds-button__icon"/>
+                                </span>
+                            </aura:if>
+                            <span class="slds-assistive-text">Step 1 </span>
+                        </button>
+                    </li>
+                    <li class="{!v.state == 2 ? 'slds-progress__item slds-is-active' : 'slds-progress__item'}" id="progress2">
+                        <button class="{!v.state > 2 ? 'slds-button slds-button--icon slds-progress__marker progressBarButton slds-progress__marker--icon' : 'slds-button slds-button--icon slds-progress__marker progressBarButton'}" aria-describedby="step-2-tooltip">
+                            <aura:if isTrue="{!v.state > 2}">
+                                <lightning:icon iconName="utility:success" size="x-small"/>
+                            </aura:if>
+                            <span class="slds-assistive-text">Step 2 </span>
+                        </button>
+                    </li>
+                    <li class="{!v.state == 3 ? 'slds-progress__item slds-is-active' : 'slds-progress__item'}" id="progress3">
+                        <button class="{!v.state > 3 ? 'slds-button slds-button--icon slds-progress__marker progressBarButton slds-progress__marker--icon' : 'slds-button slds-button--icon slds-progress__marker progressBarButton'}" aria-describedby="step-3-tooltip">
+                            <aura:if isTrue="{!v.state > 3}">
+                                <span style="fill:#1589ee;!important">
+                                    <lightning:icon iconName="utility:success" size="x-small" class="slds-button__icon"/>
+                                </span>
+                            </aura:if>
+                            <span class="slds-assistive-text">Step 3 </span>
+                        </button>
+                    </li>
+                    <li class="{!v.state == 4 ? 'slds-progress__item slds-is-active' : 'slds-progress__item'}" id="progress4">
+                        <button class="{!v.state > 4 ? 'slds-button slds-button--icon slds-progress__marker progressBarButton slds-progress__marker--icon' : 'slds-button slds-button--icon slds-progress__marker progressBarButton'}" aria-describedby="step-4-tooltip">
+                            <aura:if isTrue="{!v.state > 4}">
+                                <span style="fill:#1589ee;">
+                                    <lightning:icon iconName="utility:success" size="x-small" class="slds-button__icon"/>
+                                </span>
+                            </aura:if>
+                            <span class="slds-assistive-text">Step 4 </span>
+                        </button>
+                    </li>
+                    <li class="{!v.state == 5 ? 'slds-progress__item slds-is-active' : 'slds-progress__item'}" id="progress5">
+                        <button class="{!v.state > 5 ? 'slds-button slds-button--icon slds-progress__marker progressBarButton slds-progress__marker--icon' : 'slds-button slds-button--icon slds-progress__marker progressBarButton'}" aria-describedby="step-5-tooltip">
+                            <aura:if isTrue="{!v.state > 5}">
+                                <span style="fill:#1589ee;">
+                                    <lightning:icon iconName="utility:success" size="x-small" class="slds-button__icon"/>
+                                </span>
+                            </aura:if>
+                            <span class="slds-assistive-text">Step 5 </span>
+                        </button>
+                    </li>
+                </ol>
+                <div class="slds-progress-bar">
+                    <span class="slds-progress-bar__value" style="{!'width:'+v.percentage}">
+                        <span class="slds-assistive-text">Progress: 25%</span>
+                    </span>
+                </div>
+            </div>
+            <!-- Progress Bar Section End-->
+    
+    
+    <div class="{!v.state == 1 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+    	Test 1
+    </div>
+    <div class="{!v.state == 2 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+    	Test 2
+    </div>
+    <div class="{!v.state == 3 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+    	Test 3
+    </div>
+    <div class="{!v.state == 4 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+    	Test 4
+    </div>
+    <div class="{!v.state == 5 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+    	Test 5
+    </div>
+    <div class="{!v.state == 6 ? 'showState slds-grid slds-grid--align-center' : 'hideState'}">
+        Test 6
+    </div>
+    	<div class="btnFix" style="{!v.state == 6 ? 'display:none;': 'display:block;'}"> 
+            <center>
+                <span style="{!v.state == 1 ? 'display:none;': 'display:initial;'}">
+                    <lightning:button class="slds-button slds-button--neutral" onclick="{!c.goPrevious}" disabled="{!v.state == 1}" >Previous</lightning:button>
+                </span> 
+                <span style="{!v.state == 5 ? 'display:none;': 'display:initial;'}">
+                    <lightning:button class="slds-button slds-button--neutral" onclick="{!c.goNext}" disabled="{!v.state == 5}">Next</lightning:button>  
+                </span>
+                <span style="{!v.isSubmitted == true ? 'display:none;': 'display:initial;'}">
+                    <lightning:button class="slds-button slds-button--neutral" >Save &amp; Close</lightning:button>
+                </span>
+                <span style="{!and(v.state == 5,!v.isSubmitted) ? 'display:initial;': 'display:none;'}">
+                    <lightning:button class="slds-button slds-button--neutral" >Save &amp; Submit</lightning:button>
+                </span>
+            </center>
+        </div>
+    
+</aura:component>

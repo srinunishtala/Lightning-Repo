@@ -1,0 +1,5 @@
+<aura:component implements="force:appHostable">
+    Chatter
+    <forceChatter:feed type="Record" subjectId="0032800000EZXYc"/>	    
+	Chatter end
+</aura:component>

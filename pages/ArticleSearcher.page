@@ -1,0 +1,125 @@
+<apex:page action="{!init}" title="Article Search" standardController="Case" extensions="knowledgeArticleSearchController"   showHeader="false" sidebar="false" standardStyleSheets="false">
+    <apex:includeScript value="/support/console/27.0/integration.js"/>
+    <head>
+        <apex:slds/>
+    </head>
+    
+    <apex:form id="formId" styleClass="form-horizontal">
+
+        <div class="col-md-12">
+            
+            <div class="form-group">
+                <div class="col-md-6">
+                    <apex:inputText id="theSearchstring"   value="{!strSearchstring}"  styleclass="form-control" style="width:23%;display:inline !important;"/><br/>
+                    <apex:repeat value="{!lstArticleType}" var="articleType"> 
+                        <apex:inputCheckbox value="{!articleType.isSelected}" id="articleType" styleClass="isSelected" /> {!articleType.type} <br/>
+                    </apex:repeat>
+                    <apex:commandButton styleClass="btn btn-primary"  id="articleSeacrh" action="{!doSearch}" value="Search(ArticleType)" rerender="formId"/>
+                </div>
+               
+            
+            <apex:commandButton styleClass="btn btn-primary"  id="attach" action="{!createCaseArticle}" value="Attach to Case" rerender="formId" oncomplete="testRefreshPrimaryTabById()"/>
+            
+            <apex:outputPanel id="theSearchResults">
+                <apex:repeat value="{!lstArticles}" var="article">
+                    <table  width="100%" cellpadding="0" cellspacing="0" style="margin-left:1.2%">
+                        <tr>
+                            <td class="articleTd">
+                                <apex:inputCheckbox value="{!article.isSelected}" id="someId" styleClass="isSelected" onclick="activateAttach()" rendered="{!!article.isAttached}"/>
+                                <apex:commandlink style="font-size:18px !important;" onclick="testOpenSubtab('{!article.urlForArticle}','{!article.type}','{!article.title}');return false;" value="{!article.title}" />
+                            </td>
+                            <td>
+                                {!mapArticleToViewStat[article.knowledgeArticleId]}
+                            </td>
+                        </tr><br/>
+                        <tr> 
+                            <td width="50%">
+                                {!article.Summary}
+                            </td>
+                        </tr>
+                        <tr style="border-bottom:1px solid black !important;">
+                        </tr>
+                    </table>
+                </apex:repeat>  
+                
+            </apex:outputPanel>
+        </div>  
+        <script type="text/javascript">
+    
+        var urlForArticle;
+        var type;
+        var title;
+        function testOpenSubtab(url,articleType,articleTitle) {
+            urlForArticle = url;
+            type = articleType;
+            title = articleTitle;
+            //First find the ID of the primary tab to put the new subtab in
+            sforce.console.getEnclosingPrimaryTabId(openSubtab);
+        }
+        var openSubtab = function openSubtab(result) {
+            //Now that we have the primary tab ID, we can open a new subtab in it
+            var primaryTabId = result.id;
+            console.log('artcileId--',urlForArticle);
+            sforce.console.openSubtab(primaryTabId , '/'+urlForArticle, true,
+            type+':'+title, null, null, 'salesforceSubtab');
+        };
+        var openSuccess = function openSuccess(result) {
+            //Report whether we succeeded in opening the subtab
+            if (result.success == true) {
+                alert('subtab successfully opened');
+            } else {
+                alert('subtab cannot be opened');
+            }
+        };
+
+    function handlerKeyPress(ev,searchstring) 
+    {
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) 
+        {
+            findArticles(searchstring);
+            return false;
+        } 
+        else 
+        {
+            return true;
+        }
+    }
+    function findArticles(searchString)
+    {
+        if(searchString.length >= 2 || searchString == '')
+        {
+            document.getElementById('searchCharLimit').style.display = 'none';
+            searchArticles(searchString);
+        }
+        else if(searchString != '' && searchString.length < 2)
+        {
+            document.getElementById('searchCharLimit').style.display = '';
+        }
+    }
+    
+    function activateAttach()  {
+        var lstCheckBoxes = document.getElementsByClassName('isSelected');
+        var flag = false;
+        for(var i=0; i<lstCheckBoxes.length ; i++) {
+            if(lstCheckBoxes[i].checked) {
+                flag= true;
+            }
+        }
+
+        document.getElementById('{!$Component.formId.attach}').disabled=!flag;
+        
+    }
+    
+    function testRefreshPrimaryTabById() {
+        //Get the value for 'scc-pt-0' from the openPrimaryTab method
+        //This value is for example purposes only
+        var primaryTabId = 'scc-pt-0';
+        sforce.console.refreshPrimaryTabById(primaryTabId, true, null);
+    }
+    
+    activateAttach();
+    
+    </script>
+    </apex:form>
+    
+</apex:page>

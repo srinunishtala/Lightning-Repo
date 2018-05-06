@@ -1,0 +1,7 @@
+<apex:page controller="RichTextController" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <span id="inputtxt"/>
+    <script type="text/javascript">
+        $("#inputtxt").html($('<div/>').html("{!myText}").text());
+    </script>    
+</apex:page>

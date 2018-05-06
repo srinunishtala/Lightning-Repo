@@ -1,0 +1,15 @@
+<aura:component controller="SObjectLightningController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:hasSObjectName,forceCommunity:availableForAllPageTypes" access="global">
+	
+    <aura:attribute name="ObjectName" type="string" access="global" />
+    <aura:attribute name="FieldName" type="string" access="global" />
+    <aura:attribute name="fieldvalue" type="string" access="global" />
+    <aura:attribute name="id" type="string" access="global"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <div class="slds-form-element" id="{!v.id}">
+  		<label class="slds-form-element__label" for="selectSample1">{!v.FieldName}</label>
+            <ui:inputSelect aura:id="selection" class="slds-input" value="{!v.valueOfField}">
+            </ui:inputSelect>
+    </div>
+</aura:component>
